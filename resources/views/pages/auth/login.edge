@@ -1,0 +1,35 @@
+@layout({title: "Login"})
+<main class="hero min-h-screen bg-base-200">
+
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left w-full lg:w-1/2">
+      <h1 class="text-5xl font-bold">Login now!</h1>
+      <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+    </div>
+
+    <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 lg:w-1/2">
+      <form method="POST" action="{{ route('auth.login.store') }}" class="card-body">
+        {{csrfField()}}
+
+        {{-- Username --}}
+          @!form.input({
+            label: 'Username',
+            name: 'username'
+          })
+
+          {{-- Password --}}
+           @!form.input({
+            label: 'Password',
+            name: 'password',
+            type: 'password'
+          })
+
+        {{-- Login button --}}
+        <div class="form-control mt-6">
+          <button class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+@end
