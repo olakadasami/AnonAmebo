@@ -1,0 +1,15 @@
+@layout() 
+  <div class="card w-96 bg-primary text-primary-content">
+    <div class="card-body">
+        <h2 class="card-title">Welcome admin {{auth.user.username}}</h2>
+        <h3>{{user.username}}'s Messages</h3>
+
+        <ul>
+            @each(message in user.messages())
+                <li>{{message}}</li>
+            @end
+        </ul>
+      
+    </div>
+</div>
+@end

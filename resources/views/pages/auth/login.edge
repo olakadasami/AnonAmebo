@@ -1,13 +1,29 @@
 @layout({title: "Login"})
-<main class="hero min-h-screen bg-base-200">
+<main class="hero bg-base-200">
+   <div class="toast toast-end">
+      @flashMessage('notification')
+          <div class="alert alert-{{ $message.type }}">
+              <span>{{ $message.message }}</span>
+            {{inspect($message.message)}}
+          </div>
+      @end
 
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <div class="text-center lg:text-left w-full lg:w-1/2">
+      @error('E_UNAUTHORIZED_ACCESS')
+        <div class="alert alert-error">
+            <span>{{ $message }}</span>
+          {{inspect($message)}}
+        </div>
+      @end
+
+
+  </div>
+
+  <div class="hero-content flex-col ">
+    <div class="text-center w-full">
       <h1 class="text-5xl font-bold">Login now!</h1>
-      <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
     </div>
 
-    <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 lg:w-1/2">
+    <div class="card shrink-0 w-full max-w-md shadow-2xl bg-base-100">
       <form method="POST" action="{{ route('auth.login.store') }}" class="card-body">
         {{csrfField()}}
 

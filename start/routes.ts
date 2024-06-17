@@ -9,13 +9,22 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const UsersController = () => import('#controllers/users_controller')
 const MessagesController = () => import('#controllers/messages_controller')
 const LogoutController = () => import('#controllers/auth/logout_controller')
 const RegisterController = () => import('#controllers/auth/register_controller')
 const LoginController = () => import('#controllers/auth/login_controller')
 
-router.on('/').render('pages/home').use(middleware.guest())
+// Application Home Page
+router
+  .get('/', ({ view }) => {
+    return view.render('pages/home')
+  })
+  .as('home')
 
+/**
+ * Auth Routes
+ */
 router
   .group(() => {
     // Login
@@ -32,31 +41,55 @@ router
       .as('register.store')
       .use(middleware.guest())
 
+    // Logout
     router.post('/logout', [LogoutController, 'handle']).as('logout').use(middleware.auth())
   })
   .prefix('/auth')
   .as('auth')
 
+/**
+ * User profile, What they see after logging in
+ */
 router
   .get('/profile/:username', [MessagesController, 'index'])
   .as('dashboard')
   .use(middleware.auth())
 
-router
-  .get('/message/create', [MessagesController, 'create'])
-  .as('message.create')
-  .use(middleware.guest())
-router.post('/message', [MessagesController, 'store']).as('message.store').use(middleware.guest())
-router.get('/message/:id', [MessagesController, 'show']).as('message.show').use(middleware.auth())
-
+/**
+ * Message Routes
+ */
 router
   .group(() => {
-    router
-      .get('/', (ctx) => {
-        return `Youre here ${ctx.auth.user?.username} with role ${ctx.auth.user?.roleId}`
-      })
-      .as('index')
+    // Create new message Form
+    router.get('create', [MessagesController, 'create']).as('create')
+
+    // Create new message post request
+    router.post('', [MessagesController, 'store']).as('store').use(middleware.guest())
+
+    // Get one message
+    router.get(':id', [MessagesController, 'show']).as('show').use(middleware.auth())
+
+    // Get all message
+    router.get('all/:userId', [MessagesController, 'all']).as('all').use(middleware.auth())
   })
-  .prefix('admin')
-  .as('admin')
+  .as('message')
+  .prefix('message')
+
+/**
+ * Admin Routes
+ * Access to User details
+ */
+router
+  .group(() => {
+    // Get all users
+    router.get('/', [UsersController, 'index']).as('index')
+
+    // Get one user
+    router.get('/:id', [UsersController, 'show']).as('show')
+
+    // Delete User
+    router.delete('/:id', [UsersController, 'destroy']).as('destroy')
+  })
+  .prefix('users')
+  .as('users')
   .use(middleware.admin())

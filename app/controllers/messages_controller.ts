@@ -13,8 +13,25 @@ export default class MessagesController {
     if (!auth.user) {
       throw new Exception('Must be authenticated', { code: '401' })
     }
-    const messages = await Message.query().where('user_id', auth.user.id)
+    const messages = await Message.query()
+      .where('user_id', auth.user.id)
+      .orderBy('createdAt', 'desc')
     return view.render('pages/dashboard', { messages })
+  }
+
+  /**
+   * Return list of all messages associated with the user
+   *
+   * GET "messages/all/user.username"
+   */
+  async all({ auth, view }: HttpContext) {
+    if (!auth.user) {
+      throw new Exception('Must be authenticated', { code: '401' })
+    }
+    const messages = await Message.query()
+      .where('user_id', auth.user.id)
+      .orderBy('createdAt', 'desc')
+    return view.render('pages/message/index', { messages })
   }
 
   /**

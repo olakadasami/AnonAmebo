@@ -1,0 +1,31 @@
+@layout() 
+  
+  <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Hello there</h1>
+        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+        <button class="btn btn-primary">Get Started</button>
+      </div>
+
+      <div>
+        <p>Share your message link</p>
+
+        <div class="flex gap-4 items-center">
+          <p id="copy">{{request.host()}}/message/create?u={{auth.user.username}}</p>
+          <button class="btn" id="copyBtn">Copy!</button>
+        </div>
+      </div>
+
+      <ul class="text-left">
+        @each(message in messages)
+          <li class="list-disc">
+            <a href="{{route('message.show', {id: message.id})}}">
+              {{message.message}}
+            </a>
+          </li>
+        @end
+      </ul>
+    </div>
+  </div>
+@end

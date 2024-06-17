@@ -1,0 +1,14 @@
+@layout({title: "All Messages"}) 
+    <main class="min-h-dvh">
+        <h2 class="text-3xl font-bold">All Messages</h2>
+        <ul>
+            @each(message in messages)
+              <li>
+                @!message.item({
+                    message
+                })
+              </li>
+            @end
+        </ul>
+    </main>
+@end

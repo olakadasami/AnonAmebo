@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE').notNullable()
 
-      table.string('message').notNullable()
+      table.text('message').notNullable()
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()

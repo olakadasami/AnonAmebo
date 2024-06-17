@@ -1,0 +1,12 @@
+@layout({title: "Users"}) 
+    <main>
+        <ul>
+            @each(user in users)
+                <li>
+                    <span>{{user.roleId}}</span>
+                    <span>{{user.username}}</span>
+                </li>
+            @end
+        </ul>
+    </main>
+@end

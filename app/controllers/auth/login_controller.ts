@@ -10,7 +10,7 @@ export default class LoginController {
     return view.render('pages/auth/login')
   }
 
-  async store({ request, auth, response }: HttpContext) {
+  async store({ request, auth, response, session }: HttpContext) {
     /**
      * Step 1: Get credentials from the request body
      */
@@ -25,6 +25,11 @@ export default class LoginController {
      * Step 3: Login user
      */
     await auth.use('web').login(user)
+
+    session.flash('notification', {
+      type: 'success',
+      message: 'Thanks for contacting. We will get back to you',
+    })
 
     /**
      * Step 4: Send them to a protected route

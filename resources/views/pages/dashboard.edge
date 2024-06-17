@@ -1,31 +1,38 @@
 @layout() 
   
-  <div class="hero min-h-screen bg-base-200">
+  <main class="hero min-h-screen bg-base-200">
     <div class="hero-content flex-col text-center">
-      <div class="max-w-md">
-        <h1 class="text-5xl font-bold">Hello there</h1>
-        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-        <button class="btn btn-primary">Get Started</button>
-      </div>
+      <div class="card max-w-96 bg-base-100 shadow-xl">
+      
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">Welcome <span class="">@ {{auth.user.username}}!</span></h2>
+          <p>{{messages.length}} messaes</p>
+          <div class="card-actions">
+            <a href="#messages" class="btn">See messages</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Share your message link</p>
 
-      <div>
-        <p>Share your message link</p>
-
-        <div class="flex gap-4 items-center">
-          <p id="copy">{{request.host()}}/message/create?u={{auth.user.username}}</p>
-          <button class="btn" id="copyBtn">Copy!</button>
+          <div class="flex flex-col gap-4 items-center">
+            <p class="bg-secondary text-secondary-content px-3 py-1 rounded" id="copy">{{request.host()}}/message/create?u={{auth.user.username}}</p> 
+            <button class="btn" id="copyBtn">Copy!</button>
+          </div>
         </div>
       </div>
 
+
       <ul class="text-left">
-        @each(message in messages)
-          <li class="list-disc">
-            <a href="{{route('message.show', {id: message.id})}}">
-              {{message.message}}
-            </a>
+        <li><h3 id="messages" class="font-bold text-2xl">Your Messages</h3></li>
+        @each(message in messages.slice(0,4))
+          <li class="">
+            @!message.item({
+              message: message
+            })
           </li>
         @end
+        <li><a href="{{route('message.all', {userId: auth.user.id})}}" class="btn btn-secondary">See all messages</a></li>
       </ul>
     </div>
-  </div>
+  </main>
 @end

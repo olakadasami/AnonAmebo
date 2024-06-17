@@ -1,38 +1,58 @@
+import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
   /**
-   * Display a list of resource
+   * Display a list of Users
+   *
+   * GET 'profile/users'
    */
-  async index({}: HttpContext) {}
+  async index({ view }: HttpContext) {
+    const users = await User.query().preload('messages')
+
+    return view.render('pages/users/index', { users })
+  }
+
+  // /**
+  //  * Display form to create a new user
+  //  */
+  // async create({}: HttpContext) {}
+
+  // /**
+  //  * Handle form submission for the create action
+  //  */
+  // async store({ request }: HttpContext) {}
 
   /**
-   * Display form to create a new record
+   * Show individual user
+   *
+   * GET 'profile/users/:id'
    */
-  async create({}: HttpContext) {}
+  async show({ params, view }: HttpContext) {
+    const user = await User.findOrFail(params.id)
+
+    return view.render('pages/users/show', { user })
+  }
 
   /**
-   * Handle form submission for the create action
+   * Edit individual User
    */
-  async store({ request }: HttpContext) {}
+  // async edit({ params }: HttpContext) {}
+
+  // /**
+  //  * Handle form submission for the edit action
+  //  */
+  // async update({ params, request }: HttpContext) {}
 
   /**
-   * Show individual record
+   * Delete User
+   *
+   * DELETE 'profile/users/:id'
    */
-  async show({ params }: HttpContext) {}
+  async destroy({ params, response }: HttpContext) {
+    const user = await User.findOrFail(params.id)
+    await user?.delete()
 
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
-
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) {}
+    return response.redirect().withQs().back()
+  }
 }

@@ -11,10 +11,7 @@ export default class AdminMiddleware {
     const isAdmin = ctx.auth.user?.roleId === Roles.ADMIN
 
     if (!isAdmin) {
-      throw new Exception('You are not authorized to perform this action', {
-        code: 'E_NOT_AUTHORIZED',
-        status: 401,
-      })
+      ctx.response.redirect().toRoute('dashboard')
     }
 
     /**
