@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 import Roles from '../enums/roles.js'
-import { Exception } from '@adonisjs/core/exceptions'
 
 export default class AdminMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
