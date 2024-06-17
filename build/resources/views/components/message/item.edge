@@ -1,0 +1,9 @@
+
+<div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card-body">
+        <p class="truncate">{{message.message}}</p>
+        <div class="card-actions justify-end">
+            <a href="{{route('message.show', {id: message.id})}}" class="btn btn-primary">View Message</a>
+        </div>
+    </div>
+</div>

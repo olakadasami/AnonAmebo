@@ -1,0 +1,24 @@
+
+
+<nav class="navbar bg-base-100">
+  <div class="flex-1">
+    <a class="btn btn-ghost text-xl" href="{{route('home')}}">AnonAmebo</a>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal items-center px-1">
+      @if(auth.user) 
+        <li>Welcome {{auth.user.username}}</li>
+        <li><a href="{{route('dashboard', {username: auth.user.username})}}">Dashboard</a></li>
+        <li>
+          <form method="post" action="{{route('auth.logout')}}">
+            {{ csrfField()}}
+            <button type="submit">Logout</button>
+          </form>
+        </li>
+      @else
+        <li><a href="{{route('auth.login.show')}}">Login</a></li>
+        <li><a href="{{route('auth.register.show')}}">Register</a></li>
+      @end
+    </ul>
+  </div>
+</nav>

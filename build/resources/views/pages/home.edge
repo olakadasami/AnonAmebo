@@ -1,0 +1,45 @@
+@layout() 
+  {{-- Hero --}}
+<section class="hero min-h-screen bg-base-200">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Welcome to AnonAmebo</h1>
+      <p class="py-6 text-2xl font-semibold">
+        Get anonymous feedback from your friends, cowokers and Fans
+      </p>
+      <a href="{{route('auth.register.show')}}" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+</section>
+
+{{-- accordion --}}
+<section class="px-20 py-10">
+  <h3 class="text-2xl text-primary font-bold uppercase py-10">Frequently asked questions</h3>
+
+  <div class="join join-vertical w-full">
+   @!accordion.item({
+    question: 'What is AnonAmebo?',
+    answer: 'AnonAmebo allows you to get anonymous feedback from your friends, co-workers and fans. Discover your strengths and areas of improvement by receiving feedbacks from everyone.'
+   })
+   @!accordion.item({
+    question: 'Are anonymous messages strictly for friends?',
+    answer: 'No, you can receive secret messages from every one. You just have to share Anon-Amebo link on WhatsApp status or any other social media. Many people will start sharing their honest feedback to you because they know you will never know who they are.'
+   })
+   @!accordion.item({
+    question: 'Why should I use Anon-Amebo?',
+    answer: 'Anon-Amebo is an anonymous secret message platform which has many unique features. You can check out by using just once.'
+   })
+   @!accordion.item({
+    question: 'I forgot my login password, How do I recover it?',
+    answer: 'If you forgot the Login password then please create a new account. Anyone who has only a username but not password is necessarily not the same person who has created the account. Therefore, we cannot provide password to anyone.'
+   })
+   @!accordion.item({
+    question: 'How do I get started?',
+    answer: 'Click on get started at the top of this page or Click on the Register button in the navigation menu, Enter your username and password and then click the "Register" button. Your account is now created. Copy your link by clicking the “Copy Link” button and then share that link on all your Social Media Accounts.'
+   })
+ 
+  </div>
+
+</section>
+
+@end

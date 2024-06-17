@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title ||  "AnonAmebo - Tell am your mind" }}  </title>
+    
+    @if ($slots.meta)
+        {{{ await $slots.meta() }}}
+    @endif
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body>
+        @include('partials/navBar')
+
+        {{{ await $slots.main() }}}
+
+        @include('partials/footer')
+
+    </body>
+</html>
