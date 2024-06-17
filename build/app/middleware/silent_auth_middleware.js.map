@@ -1,1 +1,0 @@
-{"version":3,"file":"silent_auth_middleware.js","sourceRoot":"","sources":["../../../app/middleware/silent_auth_middleware.ts"],"names":[],"mappings":"AAGA,MAAM,CAAC,OAAO,OAAO,oBAAoB;IACvC,KAAK,CAAC,MAAM,CAAC,GAAgB,EAAE,IAAY;QAIzC,MAAM,GAAG,CAAC,IAAI,CAAC,KAAK,EAAE,CAAA;QAKtB,MAAM,MAAM,GAAG,MAAM,IAAI,EAAE,CAAA;QAC3B,OAAO,MAAM,CAAA;IACf,CAAC;CACF"}
