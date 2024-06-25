@@ -12,6 +12,10 @@ const dbConfig = defineConfig({
         user: env.get('DB_USER'),
         password: env.get('DB_PASSWORD'),
         database: env.get('DB_DATABASE'),
+        ssl: {
+          requestCert: true, // This will help you. But you will see nwe error
+          rejectUnauthorized: false, // This line will fix new error
+        },
       },
       migrations: {
         naturalSort: true,
